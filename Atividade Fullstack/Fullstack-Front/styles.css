@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap');
 
+.completed-task {
+  text-decoration: line-through;
+  color: gray;
+}
+
+
 html,
 body {
   height: 100%;
@@ -23,6 +29,9 @@ header {
 h1,
 h2 {
   font-weight: normal;
+}
+h2 {
+  color: whitesmoke;
 }
 
 /* Estilo para botões*/
