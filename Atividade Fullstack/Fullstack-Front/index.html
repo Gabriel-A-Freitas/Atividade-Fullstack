@@ -49,8 +49,8 @@
 
   <template id="task-template">
     <li>
-      <input type="checkbox" />
-      <span></span>
+      <input type="checkbox" class="task-checkbox">
+      <span class="task-title"></span>
       <button class="btn-excluir-tarefa" data-titulo="">Excluir</button>
     </li>
   </template>
@@ -79,6 +79,11 @@
             const span = clone.querySelector('span');
             const dataTermino = new Date(tarefa.dataTermino).toLocaleDateString('pt-BR');
             span.textContent = `${tarefa.titulo} - ${tarefa.descricao} - ${dataTermino}`;
+            
+            const checkbox = clone.querySelector('.task-checkbox');
+            checkbox.addEventListener('click', () => {
+              span.classList.toggle('completed-task', checkbox.checked);
+            });
 
             const btnExcluir = clone.querySelector('.btn-excluir-tarefa');
             btnExcluir.setAttribute('data-titulo', tarefa.titulo);
