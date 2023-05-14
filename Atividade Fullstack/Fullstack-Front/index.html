@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Um PWA básico." />
+
+  <meta name="theme-color" content="#333" />
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="stylesheet" type="text/css" href="/styles.css" />
+  <title>Lista de afazeres</title>
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+</head>
+
+<body>
+  <header>
+    <h1>To-Do List</h1>
+  </header>
+
+  <main>
+    <section>
+      <h2>Adicionar tarefa</h2>
+      <form method="post">
+        <div class="form-group">
+          <label for="titulo">Título:</label>
+          <input type="text" class="form-control" id="titulo" name="titulo" required>
+        </div>
+        <div class="form-group">
+          <label for="descricao">Descrição:</label>
+          <textarea class="form-control" id="descricao" name="descricao" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="dataTermino">Data de término:</label>
+          <input type="date" class="form-control" id="dataTermino" name="dataTermino">
+        </div>
+        <button type="submit" class="btn btn-primary" onclick="adicionarTarefa()">Adicionar</button>
+      </form>
+    </section>
+
+    <section>
+      <h2>Tarefas</h2>
+      <ul id="lista-tarefas"></ul>
+    </section>
+
+  </main>
+
+  <template id="task-template">
+    <li>
+      <input type="checkbox" />
+      <span></span>
+      <button class="btn-excluir-tarefa" data-titulo="">Excluir</button>
+    </li>
+  </template>
+
+  <!-- Scripts -->
+
+  <script>
+    function carregarTarefas() {
+      fetch('https://localhost:7096/Tarefas', {
+        method: "GET",
+        mode: "cors",
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+        .then(response => response.json())
+        .then(tarefas => {
+          const listaTarefas = document.getElementById('lista-tarefas');
+          listaTarefas.innerHTML = '';
+
+          const template = document.getElementById('task-template');
+
+          tarefas.forEach(tarefa => {
+            const clone = template.content.cloneNode(true);
+
+            const span = clone.querySelector('span');
+            const dataTermino = new Date(tarefa.dataTermino).toLocaleDateString('pt-BR');
+            span.textContent = `${tarefa.titulo} - ${tarefa.descricao} - ${dataTermino}`;
+
+            const btnExcluir = clone.querySelector('.btn-excluir-tarefa');
+            btnExcluir.setAttribute('data-titulo', tarefa.titulo);
+            btnExcluir.addEventListener('click', excluirTarefa);
+
+            listaTarefas.appendChild(clone);
+          });
+        });
+    }
+
+    function excluirTarefa(event) {
+      const titulo = event.target.dataset.titulo;
+      fetch(`https://localhost:7096/Tarefas/`, {
+        method: "DELETE",
+        mode: "cors",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ titulo })
+      })
+      .then(() => {
+        carregarTarefas();
+      })
+      .catch(error => {
+        console.error('Erro ao excluir tarefa: ', error);
+      });
+    }
+
+
+    function adicionarTarefa() {
+      const titulo = document.getElementById('titulo').value;
+      const descricao = document.getElementById('descricao').value;
+      const dataTermino = document.getElementById('dataTermino').value;
+
+      fetch('https://localhost:7096/Tarefas', {
+        method: 'POST',
+        mode: "cors",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ titulo, descricao, dataTermino })
+      })
+        .then(() => {
+          window.location.replace("index.html");
+        });
+    }
+
+    carregarTarefas();
+  </script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      carregarTarefas();
+    });
+  </script>
+
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.register("service-worker.js");
+    }
+  </script>
+</body>
+
+</html>

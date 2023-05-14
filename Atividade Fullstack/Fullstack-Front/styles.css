@@ -1,0 +1,236 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@100&display=swap');
+
+html,
+body {
+  height: 100%;
+}
+
+/* Estilo para o corpo da página */
+body {
+  font-family: 'Lato', sans-serif;
+  background-color: transparent;
+  background: linear-gradient(135deg, #f8dcc1, #f7d6b9 20%, #f3cfae 40%, #efc8a4 60%, #eac19a 80%, #e5bb90);
+  font-size: 16px;
+}
+
+/* Estilo para o cabeçalho da página */
+header {
+  background-color: transparent;
+  color: white;
+  padding: 20px;
+}
+
+h1,
+h2 {
+  font-weight: normal;
+}
+
+/* Estilo para botões*/
+button {
+  border: none;
+  background-color: #007bff;
+  color: #fff;
+  padding: 0.5em 1em;
+  border-radius: 0.25em;
+  cursor: pointer;
+}
+
+/* Estilos para telas com largura menor ou igual a 600px */
+@media screen and (max-width: 600px) {
+  body {
+    font-size: 14px;
+  }
+
+  h1 {
+    font-size: 1.5em;
+  }
+
+  h2 {
+    font-size: 1.2em;
+  }
+
+  button {
+    font-size: 0.8em;
+  }
+}
+
+/* Estilo para o título da página */
+h1 {
+  margin: 0;
+  font-size: 36px;
+}
+
+/* Estilo para a seção de tarefas */
+section {
+  background: linear-gradient(to bottom, #88c5dc, #96c8dd, #a4ccdf, #b2d0e0, #c0d4e2, #ccdae4);
+  padding: 20px;
+  margin: 20px;
+  box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+}
+
+/* Estilo para o formulário de adicionar tarefa */
+/* estilo base para o formulário */
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #f8f8f8;
+  border-radius: 10px;
+}
+
+/* estilo para o título do formulário */
+form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+/* estilo para as labels do formulário */
+form label {
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+/* estilo para os inputs do formulário */
+form input[type="text"],
+form input[type="email"],
+form textarea {
+  font-family: 'Lato', sans-serif;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  margin-bottom: 20px;
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.1);
+  width: 100%;
+}
+
+.completed label {
+  text-decoration: line-through;
+}
+
+/* estilo para o botão submit */
+form input[type="submit"] {
+  background-color: black;
+  color: white;
+  padding: 10px;
+  border-radius: 8px; 
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+/* estilo para o botão submit quando o mouse passa por cima */
+form input[type="submit"]:hover {
+  background-color: #AFEEEE;
+}
+
+/* estilo para telas menores que 768px */
+@media only screen and (max-width: 767px) {
+
+  /* ajuste de margens */
+  form {
+    margin: 10px;
+    border-radius: 8px;
+    background-color: transparent;
+    font-family: "Lato", sans-serif;
+  }
+
+  /* ajuste do tamanho do título */
+  form h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  /* ajuste do tamanho das labels */
+  form label {
+    font-size: 18px;
+  }
+
+  /* ajuste do tamanho dos inputs */
+  form input[type="text"],
+  form input[type="email"],
+  form textarea {
+    font-size: 18px;
+    padding: 8px;
+    margin-bottom: 15px;
+  }
+
+  /* ajuste do tamanho do botão submit */
+  form input[type="submit"] {
+    font-size: 18px;
+    padding: 8px;
+  }
+}
+
+
+/* Estilo para o campo de adicionar tarefa */
+input[type="text"] {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 5px;
+  border: none;
+  margin-right: 10px;
+}
+
+/* Estilo para o botão de adicionar tarefa */
+button[type="submit"] {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+/* Estilo para a lista de tarefas */
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Estilo para as tarefas da lista */
+li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* Estilo para a caixa de seleção da tarefa */
+input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+/* Estilo para o texto da tarefa */
+span {
+  font-size: 16px;
+  flex: 1;
+}
+
+/* Estilo para o botão de excluir tarefa */
+button[type="button"] {
+  background-color: #f44336;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+/*Fontes*/
+@font-face {
+  font-family: "Sunshine";
+  src: url("/fonts/A\ little\ sunshine.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "Gwibble";
+  src: url("/fonts/GWIBBLE_.TTF") format("truetype");
+}
